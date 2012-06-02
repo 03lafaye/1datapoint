@@ -1,0 +1,19 @@
+<questions>
+    <question>
+        <type>graph</type>
+        <description>How are you feeling today?</description>
+        <xLabel>Anxious</xLabel>
+        <yLabel>Depressed</yLabel>
+    </question>
+    <question>
+        <type>slider</type> 
+        <description>How did you sleep?</description>
+    </question> 
+    <question>
+        <type>buttons</type> 
+        <description>How are you feeling? </description>
+        <option1>happy</option1>
+        <option2>sad</option2>
+        <option3>ok</option3>
+    </question> 
+</questions>
