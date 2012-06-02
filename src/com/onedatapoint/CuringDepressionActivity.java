@@ -52,8 +52,8 @@ public class CuringDepressionActivity extends Activity
         Log.v(LOGTAG, "loadQuestions");
         try {
             File myFile = new File(questionFileLocation);
-			FileInputStream fIn = new FileInputStream(myFile);
-			BufferedReader myReader = new BufferedReader(new InputStreamReader(fIn));
+            FileInputStream fIn = new FileInputStream(myFile);
+            BufferedReader myReader = new BufferedReader(new InputStreamReader(fIn));
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new InputSource(myReader));
