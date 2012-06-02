@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">1datapoint</string>
+    <string name="HotThoughtLabel">Hot Thought</string>
+    <string name="CancelButton"></string>
+    <string name="CancelLabel">Cancel</string>
+    <string name="SaveLabel">Save</string>
+    <string name="TextActivityLabel">Text Activity</string>
 </resources>
