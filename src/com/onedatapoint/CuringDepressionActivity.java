@@ -3,6 +3,7 @@ package com.onedatapoint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class CuringDepressionActivity extends Activity
 
     private Vector<Question> questions;
     private Vector<View> questionViews;
+    private boolean canExit = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -47,9 +49,12 @@ public class CuringDepressionActivity extends Activity
         super.onCreate(savedInstanceState);
 
         questions = new Vector<Question>();
+        questionViews = new Vector<View>();
+
         loadQuestions(questionFileLocation);
         createQuestionViews();
-        showQuestions();
+
+        setContentView(R.layout.home);
     }
 
     private boolean loadQuestions(String questionFileLocation) {
@@ -106,6 +111,34 @@ public class CuringDepressionActivity extends Activity
                 stripSpace(child);
             child=c;
         }
+    }
+
+    // Home screen button onClick handlers
+    public void openJournal(View v) {
+        canExit = false;
+        setContentView(R.layout.journal);
+    }
+    public void openReview(View v) {
+        canExit = false;
+        setContentView(R.layout.review);
+    }
+    public void openMedicine(View v) {
+        canExit = false;
+        setContentView(R.layout.medicine);
+    }
+    public void openGraphs(View v) {
+        canExit = false;
+        setContentView(R.layout.graphs);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (!canExit && keyCode == KeyEvent.KEYCODE_BACK) {
+            canExit = true;
+            setContentView(R.layout.home);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void createQuestionViews() {

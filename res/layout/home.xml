@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="150dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+    <Button
+        android:id="@+id/journalButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="openJournal"
+        android:text="Journal" />
+     <Button
+        android:id="@+id/reviewButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@id/journalButton"
+        android:onClick="openReview"
+        android:text="Review" />
+    <Button
+        android:id="@+id/medicineButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/journalButton"
+        android:onClick="openMedicine"
+        android:text="Medicine" />
+    <Button
+        android:id="@+id/graphsButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/reviewButton"
+        android:layout_toRightOf="@id/medicineButton"
+        android:onClick="openGraphs"
+        android:text="Graphs" />
+</RelativeLayout>
