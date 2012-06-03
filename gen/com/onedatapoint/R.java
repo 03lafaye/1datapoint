@@ -25,18 +25,19 @@ public final class R {
         public static final int splash=0x7f02000b;
     }
     public static final class id {
-        public static final int editText1=0x7f050007;
-        public static final int graphView=0x7f050000;
-        public static final int graphsButton=0x7f050004;
-        public static final int imageView1=0x7f05000b;
-        public static final int journalButton=0x7f050001;
-        public static final int journalView=0x7f050005;
-        public static final int medicineButton=0x7f050003;
-        public static final int reviewButton=0x7f050002;
-        public static final int reviewView=0x7f05000a;
-        public static final int textView1=0x7f050006;
-        public static final int timePicker1=0x7f050009;
-        public static final int xmlText=0x7f050008;
+        public static final int editText1=0x7f050008;
+        public static final int graphView=0x7f050001;
+        public static final int graphsButton=0x7f050005;
+        public static final int imageView1=0x7f05000c;
+        public static final int journalButton=0x7f050002;
+        public static final int journalView=0x7f050006;
+        public static final int level=0x7f050000;
+        public static final int medicineButton=0x7f050004;
+        public static final int reviewButton=0x7f050003;
+        public static final int reviewView=0x7f05000b;
+        public static final int textView1=0x7f050007;
+        public static final int timePicker1=0x7f05000a;
+        public static final int xmlText=0x7f050009;
     }
     public static final class layout {
         public static final int graphs=0x7f030000;

@@ -6,7 +6,6 @@
     android:paddingBottom="100dp"
     android:orientation="vertical" >
 
-
          <TextView
              android:id="@+id/textView1"
              android:layout_width="140dp"
