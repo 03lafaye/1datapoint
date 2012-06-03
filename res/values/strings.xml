@@ -6,4 +6,6 @@
     <string name="CancelLabel">Cancel</string>
     <string name="SaveLabel">Save</string>
     <string name="TextActivityLabel">Text Activity</string>
+    <string name="sliderActivityLabel">What\'s the intensity?</string>
+    <string name="SliderActivityButton">Slider Activity</string>
 </resources>
