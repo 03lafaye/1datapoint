@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,9 +14,9 @@ import android.widget.ImageView;
 
 public class GraphView extends ImageView {
 
-    private float lastX;
-    private float lastY;
-    private final static float touchImprintSize = 4.f;
+    private float lastX = -1.f;
+    private float lastY = -1.f;
+    private final static float touchImprintSize = 10.f;
     private static final String LOGTAG = "GraphView";
 
     public GraphView(Context context) {
@@ -34,33 +35,27 @@ public class GraphView extends ImageView {
     public boolean onTouchEvent(MotionEvent event) {
         lastX = event.getX();
         lastY = event.getY();
+
         Log.v(LOGTAG, "onTouchEvent " + lastX + ", " + lastY);
 
-        BitmapDrawable bmd = (BitmapDrawable) getDrawable();
-        Bitmap bm = bmd.getBitmap();
-
-        Bitmap bitmapResult = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bitmapResult);
-        c.drawBitmap(bm, getLeft(), getTop(), new Paint());
-
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setARGB(200, 0, 0, 200);
-        paint.setStyle(Paint.Style.STROKE);
-
-        c.drawCircle(lastX, lastY, touchImprintSize, paint);
-
-        setImageBitmap(bitmapResult);
         invalidate();
 
-        return true;
+        return super.onTouchEvent(event);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.v(LOGTAG, "onDraw");
-        Paint paint = new Paint();
-        canvas.drawCircle(lastX, lastY, touchImprintSize, paint);
         super.onDraw(canvas);
+
+        if (lastX < 0 || lastY < 0)
+            return;
+
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLUE);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+        canvas.drawCircle(lastX, lastY, touchImprintSize, paint);
     }
 }
+
