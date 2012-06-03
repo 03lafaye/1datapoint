@@ -2,10 +2,15 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#FF66CCFF">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center"
               android:orientation="vertical">
-    <ImageView
+    <com.onedatapoint.views.GraphView
         android:id="@+id/graphView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -24,4 +29,6 @@
         android:layout_height="50dp"
         android:onClick="saveAndQuit"
         android:text="Save and Quit" />
+</LinearLayout>
+
 </LinearLayout>

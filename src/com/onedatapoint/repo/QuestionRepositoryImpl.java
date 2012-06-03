@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.onedatapoint.model.Question;
 import com.onedatapoint.model.XYQuestion;
 
-
 public class QuestionRepositoryImpl implements QuestionRepository {
 
 	ArrayList<Question> questions = new ArrayList<Question>();

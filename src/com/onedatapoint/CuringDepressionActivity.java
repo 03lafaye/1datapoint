@@ -7,19 +7,18 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import com.onedatapoint.config.Config;
 import com.onedatapoint.model.Question;
 
-public class CuringDepressionActivity extends Activity
-{
-    //private final static String LOGTAG = "onedatapoint";
-    //private final static String questionFileLocation = "/sdcard/onedatapoint-questions.xml";
+public class CuringDepressionActivity extends Activity {
+    private final static String LOGTAG = "onedatapoint";
     private Iterable<Question> questions;
-    //private Vector<View> questionViews;
     private boolean canExit = true;
 
     @Override
@@ -29,12 +28,13 @@ public class CuringDepressionActivity extends Activity
         super.onCreate(savedInstanceState);
 
         questions = Config.getInstance().getQuestionRepository().getQuestions();
-        //questionViews = new Vector<View>();
 
-        //loadQuestions(questionFileLocation);
-        //createQuestionViews();
         setupAlarms();
+        for (Question question : questions)
+            Log.v(LOGTAG, question.toString());
 
+        //questionViews = new Vector<View>();
+        //createQuestionViews();
         setContentView(R.layout.home);
     }
 
