@@ -25,8 +25,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingBottom="50dp"
+        android:paddingBottom="10dp"
         android:src="@drawable/datapoint_graph_interface" />
+
+      <TextView
+            android:id="@+id/axis"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFFFF"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="50dp"
+            android:textSize="24dp"
+            android:text="X: Anxiety         Y: Irritability"></TextView>
+
     <Button
         android:layout_gravity="center"
         android:layout_width="187dp"
