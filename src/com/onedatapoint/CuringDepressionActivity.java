@@ -142,7 +142,12 @@ public class CuringDepressionActivity extends Activity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (!canExit && keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (canExit) {
+                moveTaskToBack(true);
+                return true;
+            }
+
             canExit = true;
             setContentView(R.layout.home);
             return true;
