@@ -15,16 +15,17 @@ public class LogNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         int notifID = 1; //getIntent().getExtras().getInt("NotifID");
-
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
         int icon = android.R.drawable.stat_notify_chat;        // icon from resources
-        CharSequence tickerText = "TickerText";              // ticker-text
+        CharSequence tickerText = "Feed me";              // ticker-text
         long when = System.currentTimeMillis();         // notification time
-        CharSequence contentTitle = "My notification";  // message title
-        CharSequence contentText = "Hello World!";      // message text
+        CharSequence contentTitle = "1datapoint";  // message title
+        CharSequence contentText = "Feed me data point";      // message text
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
+        final Intent notificationIntent = new Intent(context, CuringDepressionActivity.class);
+    
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
         // the next two lines initialize the Notification, using the configurations above
         Notification notification = new Notification(icon, tickerText, when);
