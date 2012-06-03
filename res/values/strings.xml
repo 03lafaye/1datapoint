@@ -2,9 +2,10 @@
 <resources>
     <string name="app_name">1datapoint</string>
     <string name="HotThoughtLabel">Hot Thought</string>
-    <string name="cancelLabel">Save &amp; Quit</string>
-    <string name="saveLabel">Save &amp; Home</string>
+    <string name="CancelButton"></string>
+    <string name="CancelLabel">Cancel</string>
+    <string name="SaveLabel">Save</string>
     <string name="TextActivityLabel">Text Activity</string>
-    <string name="SliderActivityLabel">What\'s the intensity?</string>
+    <string name="sliderActivityLabel">What\'s the intensity?</string>
     <string name="SliderActivityButton">Slider Activity</string>
 </resources>

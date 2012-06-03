@@ -20,12 +20,12 @@
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save & Home" />
+        android:text="@string/SaveLabel" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save & Quit" />
+        android:text="@string/CancelLabel" />
 
 </LinearLayout>
