@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingTop="150dp"
-    android:paddingLeft="50dp"
+    android:paddingLeft="60dp"
     android:paddingRight="50dp">
     <Button
         android:id="@+id/journalButton"

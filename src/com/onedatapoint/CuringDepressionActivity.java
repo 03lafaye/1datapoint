@@ -131,6 +131,15 @@ public class CuringDepressionActivity extends Activity
         setContentView(R.layout.graphs);
     }
 
+    public void saveAndGoHome(View v) {
+        canExit = true;
+        setContentView(R.layout.home);
+    }
+
+    public void saveAndQuit(View v) {
+        moveTaskToBack(true);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (!canExit && keyCode == KeyEvent.KEYCODE_BACK) {
