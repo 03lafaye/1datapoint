@@ -35,9 +35,9 @@ public final class R {
         public static final int textlayout=0x7f030002;
     }
     public static final class string {
-        public static final int CancelButton=0x7f040002;
         public static final int CancelLabel=0x7f040003;
         public static final int HotThoughtLabel=0x7f040001;
+        public static final int Save & Quit=0x7f040002;
         public static final int SaveLabel=0x7f040004;
         public static final int SliderActivityButton=0x7f040007;
         public static final int TextActivityLabel=0x7f040005;
