@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -52,7 +50,7 @@ public class GraphView extends ImageView {
 
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
+        paint.setColor(0xFF99CA3C);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         canvas.drawCircle(lastX, lastY, touchImprintSize, paint);

@@ -15,20 +15,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/graphs" />
+        android:src="@drawable/datapoint_graph_interface" />
     <Button
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:onClick="saveAndGoHome"
-        android:text="Save and Return Home" />
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:background="@drawable/datapoint_save_home_button"
+        android:onClick="saveAndGoHome" />
 
     <Button
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:onClick="saveAndQuit"
-        android:text="Save and Quit" />
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:background="@drawable/datapoint_save_quit_button"
+        android:onClick="saveAndQuit" />
+
+
 </LinearLayout>
 
 </LinearLayout>
