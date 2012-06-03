@@ -11,27 +11,27 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:onClick="openJournal"
-        android:text="Journal" />
+        android:background="@drawable/datapoint_menu_journal" />
      <Button
         android:id="@+id/reviewButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_toRightOf="@id/journalButton"
         android:onClick="openReview"
-        android:text="Review" />
+        android:background="@drawable/datapoint_menu_review"/>
     <Button
         android:id="@+id/medicineButton"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="100dp"        
         android:layout_below="@id/journalButton"
         android:onClick="openMedicine"
-        android:text="Medicine" />
+        android:background="@drawable/datapoint_menu_medication" />
     <Button
         android:id="@+id/graphsButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@id/reviewButton"
         android:layout_toRightOf="@id/medicineButton"
-        android:onClick="openGraphs"
-        android:text="Graphs" />
+        android:background="@drawable/datapoint_menu_graph"
+        android:onClick="openGraphs" />
 </RelativeLayout>
