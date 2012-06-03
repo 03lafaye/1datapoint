@@ -1,87 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="bottom|center_horizontal|top"
     android:orientation="vertical" >
 
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.39" >
+         <TextView
+            android:id="@+id/textView1"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/HotThoughtLabel"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+         <EditText
+             android:id="@+id/editText1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:scrollHorizontally="false"
+             android:minLines="4"
+             android:ems="10"
+             android:inputType="textMultiLine" 
+             android:isScrollContainer="true"
+             android:layout_below="@+id/textView1">
+             <requestFocus />
+         </EditText>
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/HotThoughtLabel"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+	<include
+	    android:layout_height="284dp"
+	    layout="@layout/parentlayout" />
 
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <EditText
-                android:id="@+id/HotThoughtInputText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:lines="5"
-                android:inputType="textMultiLine" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/SaveLabel" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/CancelLabel" />
-
-        </TableRow>
-
-    </TableLayout>
-
-</LinearLayout>
+</RelativeLayout>

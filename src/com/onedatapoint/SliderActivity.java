@@ -10,7 +10,7 @@ public class SliderActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sliderlayout);
+        setContentView(R.layout.parentlayout);
         
         final Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {

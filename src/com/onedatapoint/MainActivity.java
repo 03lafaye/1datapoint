@@ -5,22 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
-public class TextActivity extends Activity {
-	@Override
-    public void onCreate(Bundle savedInstanceState)
+public class MainActivity extends Activity {
+	public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.textlayout);
+        setContentView(R.layout.parentlayout);
         
-        
-        
-        /*final Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        final Button cancelButton = (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-            	TextActivity.this.finish();
+            	Intent myintent = new Intent(MainActivity.this, CuringDepressionActivity.class);
+            	MainActivity.this.finish();
             	
             }
         });
@@ -30,12 +27,10 @@ public class TextActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-            	final EditText hotThoughtInputText = (EditText) findViewById(R.id.HotThoughtInputText);
-            	hotThoughtInputText.setEnabled(false);
-            	
-            	TextActivity.this.finish();
+            	Intent myintent = new Intent(MainActivity.this, CuringDepressionActivity.class);
+            	MainActivity.this.finish();
             	
             }
-        });*/
+        });
     }
 }
