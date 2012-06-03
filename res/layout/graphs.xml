@@ -10,6 +10,7 @@
               android:layout_height="wrap_content"
               android:layout_gravity="center"
               android:orientation="vertical">
+
     <com.onedatapoint.views.GraphView
         android:id="@+id/graphView"
         android:layout_width="fill_parent"

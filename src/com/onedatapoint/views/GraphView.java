@@ -1,14 +1,14 @@
 package com.onedatapoint.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import com.onedatapoint.model.Question;
+import com.onedatapoint.model.XYQuestion;
 
 public class GraphView extends ImageView {
 
@@ -27,6 +27,10 @@ public class GraphView extends ImageView {
 
     public GraphView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setQuestion(XYQuestion question) {
+
     }
 
     @Override
