@@ -3,7 +3,9 @@ package com.onedatapoint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,6 +38,7 @@ public class CuringDepressionActivity extends Activity
     }
 
     private Vector<Question> questions;
+    private Vector<View> questionViews;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -45,6 +48,7 @@ public class CuringDepressionActivity extends Activity
 
         questions = new Vector<Question>();
         loadQuestions(questionFileLocation);
+        createQuestionViews();
         showQuestions();
     }
 
@@ -87,9 +91,9 @@ public class CuringDepressionActivity extends Activity
         return true;
     }
 
-    private static void stripSpace(Node node){
+    private static void stripSpace(Node node) {
         Node child = node.getFirstChild();
-        while(child!=null){
+        while(child!=null) {
             // save the sibling of the node that will
             // perhaps be removed and set to null
             Node c = child.getNextSibling();
@@ -104,7 +108,29 @@ public class CuringDepressionActivity extends Activity
         }
     }
 
+    private void createQuestionViews() {
+        for (Question question : questions) {
+            View questionView = new View(this);
+            // Create respective View object
+            if (question.type.equals("graph"))
+                // Instantiate View
+                break;
+            else if (question.type.equals("slider"))
+                // Instantiate View
+                break;
+            else if (question.type.equals("buttons"))
+                // Instantiate View
+                break;
+            questionViews.add(questionView);
+        }
+    }
+
     private void showQuestions() {
         setContentView(R.layout.main);
+
+        TextView text = (TextView)findViewById(R.id.xmlText);
+        for (Question question : questions) {
+            text.append("\n" + question.toString());
+        }
     }
 }
