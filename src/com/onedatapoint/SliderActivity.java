@@ -17,7 +17,7 @@ public class SliderActivity extends Activity {
             public void onClick(View v) {
                 // Perform action on click
             	Intent myintent = new Intent(SliderActivity.this, CuringDepressionActivity.class);
-            	SliderActivity.this.startActivity(myintent);
+            	SliderActivity.this.finish();
             	
             }
         });
@@ -28,7 +28,7 @@ public class SliderActivity extends Activity {
             public void onClick(View v) {
                 // Perform action on click
             	Intent myintent = new Intent(SliderActivity.this, CuringDepressionActivity.class);
-            	SliderActivity.this.startActivity(myintent);
+            	SliderActivity.this.finish();
             	
             }
         });

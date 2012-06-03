@@ -18,8 +18,7 @@ public class TextActivity extends Activity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-            	Intent myintent = new Intent(TextActivity.this, CuringDepressionActivity.class);
-            	TextActivity.this.startActivity(myintent);
+            	TextActivity.this.finish();
             	
             }
         });
@@ -32,8 +31,7 @@ public class TextActivity extends Activity {
             	final EditText hotThoughtInputText = (EditText) findViewById(R.id.HotThoughtInputText);
             	hotThoughtInputText.setEnabled(false);
             	
-            	Intent myintent = new Intent(TextActivity.this, CuringDepressionActivity.class);
-            	TextActivity.this.startActivity(myintent);
+            	TextActivity.this.finish();
             	
             }
         });
