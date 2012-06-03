@@ -1,12 +1,16 @@
 package com.onedatapoint;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
 import com.onedatapoint.config.Config;
 import com.onedatapoint.model.Question;
 
@@ -14,7 +18,6 @@ public class CuringDepressionActivity extends Activity
 {
     //private final static String LOGTAG = "onedatapoint";
     //private final static String questionFileLocation = "/sdcard/onedatapoint-questions.xml";
-
     private Iterable<Question> questions;
     //private Vector<View> questionViews;
     private boolean canExit = true;
@@ -30,12 +33,32 @@ public class CuringDepressionActivity extends Activity
 
         //loadQuestions(questionFileLocation);
         //createQuestionViews();
+        setupAlarms();
 
         setContentView(R.layout.home);
     }
 
+    private void setupAlarms() {
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, LogNotificationReceiver.class), 0);               
 
-    // Home screen button onClick handlers
+        Calendar calendar = Calendar.getInstance();
+
+        // TODO: This is the real code
+        //calendar.set(Calendar.HOUR_OF_DAY, 9);
+        //calendar.set(Calendar.MINUTE, 00);
+        //calendar.set(Calendar.SECOND, 00);
+
+        // Uncomment for testing
+        //alarmManager.set(AlarmManager.ELAPSED_REALTIME, 0, pendingIntent);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, 2);
+
+        // This one sets the alarm for 9am daily
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24*60*60*1000 , pendingIntent);  //set repeating every 24 hours
+	}
+
+	// Home screen button onClick handlers
     public void openJournal(View v) {
         canExit = false;
         setContentView(R.layout.journal);
