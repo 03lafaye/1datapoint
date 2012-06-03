@@ -50,7 +50,6 @@ public class CuringDepressionActivity extends Activity {
         //calendar.set(Calendar.SECOND, 00);
 
         // Uncomment for testing
-        //alarmManager.set(AlarmManager.ELAPSED_REALTIME, 0, pendingIntent);
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.SECOND, 2);
 
