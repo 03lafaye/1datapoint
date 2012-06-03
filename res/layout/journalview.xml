@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/journalView"
+    android:gravity="bottom|center_horizontal|top"
+    android:orientation="vertical" >
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="140dp"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:text="Hot Thought"
+             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+         <EditText
+             android:id="@+id/editText1"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:scrollHorizontally="false"
+             android:minLines="5"
+             android:maxLines="10"
+             android:ems="10"
+             android:inputType="textMultiLine"
+             android:isScrollContainer="true"
+             android:gravity="top"
+             android:layout_below="@+id/textView1">
+             <requestFocus />
+         </EditText>
+
+</RelativeLayout>
