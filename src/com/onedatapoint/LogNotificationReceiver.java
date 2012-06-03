@@ -17,7 +17,7 @@ public class LogNotificationReceiver extends BroadcastReceiver {
         int notifID = 1; //getIntent().getExtras().getInt("NotifID");
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
-        int icon = android.R.drawable.stat_notify_chat;        // icon from resources
+        int icon = R.drawable.ic_alert_notification;
         CharSequence tickerText = "Feed me";              // ticker-text
         long when = System.currentTimeMillis();         // notification time
         CharSequence contentTitle = "1datapoint";  // message title
