@@ -5,9 +5,9 @@ import com.onedatapoint.repo.*;
 public class Config {
 
 	private static Config instance = null;
-	private QuestionRepository questionRepository;
-	private MedicationRepository medicationRepository;
-	private ResponseRepository responseRepository;
+	private QuestionRepository questionRepository = null;
+	private MedicationRepository medicationRepository = null;
+	private ResponseRepository responseRepository = null;
 	
 
 	/**
@@ -15,6 +15,8 @@ public class Config {
 	 */
 	private Config() {
 		questionRepository = new QuestionRepositoryImpl();
+		responseRepository = new ResponseRepositoryImpl();
+		medicationRepository = new MedicationRepositoryImpl();
 	} 
 	
 	public static synchronized Config getInstance() {
