@@ -32,10 +32,10 @@ public final class R {
         public static final int journalButton=0x7f050001;
         public static final int journalView=0x7f050005;
         public static final int medicineButton=0x7f050003;
-        public static final int medicineView=0x7f050009;
         public static final int reviewButton=0x7f050002;
         public static final int reviewView=0x7f05000a;
         public static final int textView1=0x7f050006;
+        public static final int timePicker1=0x7f050009;
         public static final int xmlText=0x7f050008;
     }
     public static final class layout {
@@ -45,8 +45,9 @@ public final class R {
         public static final int journalview=0x7f030003;
         public static final int main=0x7f030004;
         public static final int medicine=0x7f030005;
-        public static final int review=0x7f030006;
-        public static final int splash=0x7f030007;
+        public static final int medview=0x7f030006;
+        public static final int review=0x7f030007;
+        public static final int splash=0x7f030008;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

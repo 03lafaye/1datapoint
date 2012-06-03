@@ -16,6 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingBottom="50dp"
         android:src="@drawable/datapoint_graph_interface" />
     <Button
         android:layout_gravity="center"
