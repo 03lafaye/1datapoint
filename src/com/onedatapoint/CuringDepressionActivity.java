@@ -28,7 +28,7 @@ public class CuringDepressionActivity extends Activity {
 
         questions = Config.getInstance().getQuestionRepository().getQuestions();
 
-        setupAlarms();
+//        setupAlarms();
         for (Question question : questions)
             Log.v(LOGTAG, question.toString());
 

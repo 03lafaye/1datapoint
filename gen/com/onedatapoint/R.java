@@ -11,23 +11,28 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int datapoint_graph_interface=0x7f020000;
-        public static final int datapoint_menu_graph=0x7f020001;
-        public static final int datapoint_menu_journal=0x7f020002;
-        public static final int datapoint_menu_medication=0x7f020003;
-        public static final int datapoint_menu_review=0x7f020004;
-        public static final int datapoint_save_home_button=0x7f020005;
-        public static final int datapoint_save_quit_button=0x7f020006;
-        public static final int graphs=0x7f020007;
-        public static final int ic_alert_notification=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int journal=0x7f02000a;
-        public static final int launcher_icon=0x7f02000b;
-        public static final int medicine=0x7f02000c;
-        public static final int notification_button=0x7f02000d;
-        public static final int review=0x7f02000e;
-        public static final int splash=0x7f02000f;
-        public static final int splash_screen=0x7f020010;
+        public static final int clock_bg=0x7f020000;
+        public static final int clock_hinge=0x7f020001;
+        public static final int clock_long_hand=0x7f020002;
+        public static final int clock_short_hand=0x7f020003;
+        public static final int clockface=0x7f020004;
+        public static final int datapoint_graph_interface=0x7f020005;
+        public static final int datapoint_menu_graph=0x7f020006;
+        public static final int datapoint_menu_journal=0x7f020007;
+        public static final int datapoint_menu_medication=0x7f020008;
+        public static final int datapoint_menu_review=0x7f020009;
+        public static final int datapoint_save_home_button=0x7f02000a;
+        public static final int datapoint_save_quit_button=0x7f02000b;
+        public static final int graphs=0x7f02000c;
+        public static final int ic_alert_notification=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int journal=0x7f02000f;
+        public static final int launcher_icon=0x7f020010;
+        public static final int medicine=0x7f020011;
+        public static final int notification_button=0x7f020012;
+        public static final int review=0x7f020013;
+        public static final int splash=0x7f020014;
+        public static final int splash_screen=0x7f020015;
     }
     public static final class id {
         public static final int axis=0x7f050002;
@@ -42,7 +47,7 @@ public final class R {
         public static final int reviewButton=0x7f050004;
         public static final int reviewView=0x7f05000c;
         public static final int textView1=0x7f050008;
-        public static final int timePicker1=0x7f05000b;
+        public static final int timePicker=0x7f05000b;
         public static final int xmlText=0x7f05000a;
     }
     public static final class layout {
