@@ -48,14 +48,14 @@ public class AnalogClockTimePicker extends View {
             mIsDayTime = clockState.mIsDayTime;
         }
 
-        public boolean mToggledDayTime;
-        public boolean mChanged;
-        public boolean mFirstTouch;
+        private boolean mToggledDayTime;
+        private boolean mChanged;
+        private boolean mFirstTouch;
         private boolean mIsDayTime;
     }
 
     private ClockState mCurrentState;
-    private ClockState mPreviousState;
+    private ClockState mToggleDayTimeState;
 
     public AnalogClockTimePicker(Context context) {
         this(context, null);
@@ -78,9 +78,9 @@ public class AnalogClockTimePicker extends View {
         mHour = -1;
         mMinutes = -1;
 
-        mPreviousState = new ClockState();
-        mPreviousState.mChanged = true;
-        mPreviousState.mToggledDayTime = true;
+        mToggleDayTimeState = new ClockState();
+        mToggleDayTimeState.mChanged = true;
+        mToggleDayTimeState.mToggledDayTime = true;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AnalogClockTimePicker extends View {
                 && (y - mDayTimeTextDelta) <= 40) {
 
             boolean isDayTime = !mCurrentState.mIsDayTime;
-            mCurrentState = new ClockState(mPreviousState);
+            mCurrentState = new ClockState(mToggleDayTimeState);
             mCurrentState.mIsDayTime = isDayTime;
 
             invalidate();
@@ -189,8 +189,7 @@ public class AnalogClockTimePicker extends View {
                 canvas.drawText(mCurrentState.mIsDayTime ? "AM" : "PM", dialIntrinsicWidth - mDayTimeTextDelta, mDayTimeTextDelta, paint);
             }
 
-            if (!mCurrentState.mToggledDayTime)
-                mCurrentState.mFirstTouch = !mCurrentState.mFirstTouch;
+            mCurrentState.mFirstTouch = !mCurrentState.mFirstTouch;
         }
 
         canvas.save();
