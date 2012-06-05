@@ -3,39 +3,42 @@ package com.onedatapoint.views;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.text.format.Time;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import com.onedatapoint.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AnalogClockTimePicker extends View {
-    private Time mCalendar;
+    private final static String LOGTAG = "AnalogClockTimePicker";
+    private final static boolean mDebug = false;
+
+    private Date mDate;
 
     private Drawable mHourHand;
     private Drawable mMinuteHand;
     private Drawable mClockHinge;
     private Drawable mDial;
 
-    private int mDialWidth;
-    private int mDialHeight;
-    private float mMinutes;
-    private float mHour;
+    private int mMinutes;
+    private int mHour;
 
     private float mLastX = -1.f;
     private float mLastY = -1.f;
 
     private boolean mChanged;
+    private boolean mFirstTouch = true;
 
-    public AnalogClockTimePicker(Context context) {
-        this(context, null);
-    }
+    private SimpleDateFormat mFormatter;
 
-    public AnalogClockTimePicker(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
+    private final static int mTimeTextDelta = 10;
+    private float mTimeTextSize = 20;
 
     public AnalogClockTimePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -45,10 +48,6 @@ public class AnalogClockTimePicker extends View {
         mMinuteHand = resources.getDrawable(R.drawable.clock_long_hand);
         mClockHinge = resources.getDrawable(R.drawable.clock_hinge);
         mDial = resources.getDrawable(R.drawable.clockface);
-
-        mCalendar = new Time();
-        mDialWidth = mDial.getIntrinsicWidth();
-        mDialHeight = mDial.getIntrinsicHeight();
     }
 
     @Override
@@ -57,8 +56,40 @@ public class AnalogClockTimePicker extends View {
         float y = event.getY();
 
         if (x != mLastX || y != mLastY) {
-            mLastX = x;
-            mLastY = y;
+            mLastX = Math.min(x, mDial.getIntrinsicWidth());
+            mLastY = Math.min(y, mDial.getIntrinsicHeight());
+
+            double cX = getWidth() / 2;
+            double cY = getHeight() / 2;
+            double R = mDial.getIntrinsicWidth() / 2;
+
+            final double pX = mLastX;
+            final double pY = mLastY;
+
+            // Find closest point on the circle to the touch point
+            double vX = pX - cX;
+            double vY = pY - cY;
+            double magV = Math.sqrt(vX * vX + vY * vY);
+            double aX = cX + vX / magV * R;
+            double aY = cY + vY / magV * R;
+
+            // Find angle between 12 o'clock and closest point to touch point
+            double bX = cX;
+            double bY = cY - R;
+
+            double angle = 2 * Math.toDegrees(Math.atan2(aY - bY, aX - bX));
+
+            if (mDebug)
+                Log.v(LOGTAG, "a: " + aX + "," + aY + "; b: " + bX + "," + bY + " angle: " + angle);
+
+            mChanged = true;
+
+            // First touch is to set the hour hand
+            if (mFirstTouch)
+                mHour = (int) (12 * angle) / 360;
+            else
+                mMinutes = (int) (60 * angle) / 360;
+
             invalidate();
         }
 
@@ -77,94 +108,71 @@ public class AnalogClockTimePicker extends View {
 
         mDial.setBounds(viewWidth - dialIntrinsicHeight, viewHeight - dialIntrinsicHeight,
                         dialIntrinsicWidth, dialIntrinsicHeight);
+
         mDial.draw(canvas);
-
-        if (mLastX < 0 || mLastY < 0)
-            return;
-
-        mHourHand.setBounds(viewWidth / 2, viewHeight / 2,
-                mHourHand.getIntrinsicWidth(), mHourHand.getIntrinsicHeight());
-        mHourHand.draw(canvas);
 
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(0xFF99CA3C);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        canvas.drawCircle((viewWidth - dialIntrinsicWidth) / 2 + Math.min(mLastX, dialIntrinsicWidth),
-                          (viewHeight - dialIntrinsicHeight) / 2 + Math.min(mLastY, dialIntrinsicHeight),
-                          10.f, paint);
+        if (mChanged) {
+            canvas.save();
+            canvas.rotate(mHour / 12.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
+            canvas.translate((viewWidth / 2) - mHourHand.getIntrinsicWidth() / 2,
+                    (viewHeight / 2) - mHourHand.getIntrinsicHeight());
 
-//        mClockHinge.setBounds(viewWidth / 2, viewHeight / 2,
-//                              mClockHinge.getIntrinsicWidth(), mClockHinge.getIntrinsicHeight());
-//        mClockHinge.draw(canvas);
+            mHourHand.setBounds(0, 0,
+                    mHourHand.getIntrinsicWidth(), mHourHand.getIntrinsicHeight());
+            mHourHand.draw(canvas);
+            canvas.restore();
 
-//        boolean changed = mChanged;
-//        if (changed) {
-//            mChanged = false;
-//        }
-//        int availableWidth = getRight() - getLeft();
-//        int availableHeight = getBottom() - getTop();
-//
-//        int x = availableWidth / 2;
-//        int y = availableHeight / 2;
-//
-//        final Drawable dial = mDial;
-//        int w = dial.getIntrinsicWidth();
-//        int h = dial.getIntrinsicHeight();
-//
-//        boolean scaled = false;
-//
-//        if (availableWidth < w || availableHeight < h) {
-//            scaled = true;
-//            float scale = Math.min((float) availableWidth / (float) w,
-//                    (float) availableHeight / (float) h);
-//            canvas.save();
-//            canvas.scale(scale, scale, x, y);
-//        }
-//
-//        if (changed) {
-//            dial.setBounds(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2));
-//        }
-//
-//        dial.draw(canvas);
-//
-//        canvas.save();
-//        canvas.rotate(mHour / 12.0f * 360.0f, x, y);
-//
-//        final Drawable hourHand = mHourHand;
-//        if (changed) {
-//            w = hourHand.getIntrinsicWidth();
-//            h = hourHand.getIntrinsicHeight();
-//            hourHand.setBounds(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2));
-//        }
-//        hourHand.draw(canvas);
-//        canvas.restore();
-//
-//        canvas.save();
-//        canvas.rotate(mMinutes / 60.0f * 360.0f, x, y);
-//
-//        final Drawable minuteHand = mMinuteHand;
-//        if (changed) {
-//            w = minuteHand.getIntrinsicWidth();
-//            h = minuteHand.getIntrinsicHeight();
-//            minuteHand.setBounds(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2));
-//        }
-//        minuteHand.draw(canvas);
-//        canvas.restore();
-//
-//        canvas.save();
-//        final Drawable clockHinge = mClockHinge;
-//        if (changed) {
-//            w = clockHinge.getIntrinsicWidth();
-//            h = clockHinge.getIntrinsicHeight();
-//            clockHinge.setBounds(x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2));
-//        }
-//        clockHinge.draw(canvas);
-//        canvas.restore();
-//
-//        if (scaled) {
-//            canvas.restore();
-//        }
+            if (!mFirstTouch) {
+                canvas.save();
+                canvas.rotate(mMinutes / 60.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
+                canvas.translate((viewWidth / 2) - mMinuteHand.getIntrinsicWidth() / 2,
+                        (viewHeight / 2) - mMinuteHand.getIntrinsicHeight());
+
+                mMinuteHand.setBounds(0, 0,
+                        mMinuteHand.getIntrinsicWidth(), mMinuteHand.getIntrinsicHeight());
+
+                mMinuteHand.draw(canvas);
+                canvas.restore();
+
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(mTimeTextSize);
+                canvas.drawText(toString(), mTimeTextDelta, viewHeight - mTimeTextDelta, paint);
+            }
+
+            mFirstTouch = !mFirstTouch;
+        }
+
+        canvas.save();
+        canvas.translate((viewWidth / 2) - (mClockHinge.getIntrinsicWidth() / 2),
+                         (viewHeight / 2) - (mClockHinge.getIntrinsicHeight() / 2));
+        mClockHinge.setBounds(0, 0,
+                mClockHinge.getIntrinsicWidth(), mClockHinge.getIntrinsicHeight());
+        mClockHinge.draw(canvas);
+        canvas.restore();
+
+        if (mDebug && mChanged) {
+            paint.setColor(0xFF99CA3C);
+            canvas.drawCircle((viewWidth - dialIntrinsicWidth) / 2 + Math.min(mLastX, dialIntrinsicWidth),
+                    (viewHeight - dialIntrinsicHeight) / 2 + Math.min(mLastY, dialIntrinsicHeight),
+                    10.f, paint);
+        }
+
+        mChanged = false;
+    }
+
+    @Override
+    public String toString() {
+        if (mDate == null)
+            mDate = new Date();
+        mDate.setHours(mHour);
+        mDate.setMinutes(mMinutes);
+
+        if (mFormatter == null)
+            mFormatter = new SimpleDateFormat("hh:mm");
+        return mFormatter.format(mDate);
     }
 }
