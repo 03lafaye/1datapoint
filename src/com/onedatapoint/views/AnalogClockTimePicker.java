@@ -32,13 +32,30 @@ public class AnalogClockTimePicker extends View {
     private float mLastX = -1.f;
     private float mLastY = -1.f;
 
-    private boolean mChanged;
-    private boolean mFirstTouch = true;
-
-    private SimpleDateFormat mFormatter;
+    private SimpleDateFormat mTimeFormatter;
 
     private final static int mTimeTextDelta = 10;
     private float mTimeTextSize = 20;
+    private int mDayTimeTextDelta = 25;
+
+    private class ClockState {
+        public ClockState() {}
+
+        public ClockState(ClockState clockState) {
+            mToggledDayTime = clockState.mToggledDayTime;
+            mChanged = clockState.mChanged;
+            mFirstTouch = clockState.mFirstTouch;
+            mIsDayTime = clockState.mIsDayTime;
+        }
+
+        public boolean mToggledDayTime;
+        public boolean mChanged;
+        public boolean mFirstTouch;
+        private boolean mIsDayTime;
+    }
+
+    private ClockState mCurrentState;
+    private ClockState mPreviousState;
 
     public AnalogClockTimePicker(Context context) {
         this(context, null);
@@ -56,12 +73,32 @@ public class AnalogClockTimePicker extends View {
         mMinuteHand = resources.getDrawable(R.drawable.clock_long_hand);
         mClockHinge = resources.getDrawable(R.drawable.clock_hinge);
         mDial = resources.getDrawable(R.drawable.clockface);
+        mCurrentState = new ClockState();
+        mCurrentState.mFirstTouch = true;
+        mHour = -1;
+        mMinutes = -1;
+
+        mPreviousState = new ClockState();
+        mPreviousState.mChanged = true;
+        mPreviousState.mToggledDayTime = true;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
+
+        // The user touched near the AM/PM toggle
+        if ((mHour != -1 && mCurrentState.mFirstTouch) && x - (mDial.getIntrinsicWidth() - mDayTimeTextDelta) <= 40
+                && (y - mDayTimeTextDelta) <= 40) {
+
+            boolean isDayTime = !mCurrentState.mIsDayTime;
+            mCurrentState = new ClockState(mPreviousState);
+            mCurrentState.mIsDayTime = isDayTime;
+
+            invalidate();
+            return super.onTouchEvent(event);
+        }
 
         if (x != mLastX || y != mLastY) {
             mLastX = Math.min(x, mDial.getIntrinsicWidth());
@@ -90,10 +127,10 @@ public class AnalogClockTimePicker extends View {
             if (mDebug)
                 Log.v(LOGTAG, "a: " + aX + "," + aY + "; b: " + bX + "," + bY + " angle: " + angle);
 
-            mChanged = true;
+            mCurrentState.mChanged = true;
 
             // First touch is to set the hour hand
-            if (mFirstTouch)
+            if (mCurrentState.mFirstTouch)
                 mHour = (int) (12 * angle) / 360;
             else
                 mMinutes = (int) (60 * angle) / 360;
@@ -123,7 +160,7 @@ public class AnalogClockTimePicker extends View {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        if (mChanged) {
+        if (mCurrentState.mChanged) {
             canvas.save();
             canvas.rotate(mHour / 12.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
             canvas.translate((viewWidth / 2) - mHourHand.getIntrinsicWidth() / 2,
@@ -134,7 +171,10 @@ public class AnalogClockTimePicker extends View {
             mHourHand.draw(canvas);
             canvas.restore();
 
-            if (!mFirstTouch) {
+            paint.setColor(Color.WHITE);
+            paint.setTextSize(mTimeTextSize);
+
+            if (!mCurrentState.mFirstTouch) {
                 canvas.save();
                 canvas.rotate(mMinutes / 60.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
                 canvas.translate((viewWidth / 2) - mMinuteHand.getIntrinsicWidth() / 2,
@@ -145,13 +185,12 @@ public class AnalogClockTimePicker extends View {
 
                 mMinuteHand.draw(canvas);
                 canvas.restore();
-
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(mTimeTextSize);
                 canvas.drawText(toString(), mTimeTextDelta, viewHeight - mTimeTextDelta, paint);
+                canvas.drawText(mCurrentState.mIsDayTime ? "AM" : "PM", dialIntrinsicWidth - mDayTimeTextDelta, mDayTimeTextDelta, paint);
             }
 
-            mFirstTouch = !mFirstTouch;
+            if (!mCurrentState.mToggledDayTime)
+                mCurrentState.mFirstTouch = !mCurrentState.mFirstTouch;
         }
 
         canvas.save();
@@ -162,14 +201,15 @@ public class AnalogClockTimePicker extends View {
         mClockHinge.draw(canvas);
         canvas.restore();
 
-        if (mDebug && mChanged) {
+        if (mDebug && mCurrentState.mChanged) {
             paint.setColor(0xFF99CA3C);
             canvas.drawCircle((viewWidth - dialIntrinsicWidth) / 2 + Math.min(mLastX, dialIntrinsicWidth),
                     (viewHeight - dialIntrinsicHeight) / 2 + Math.min(mLastY, dialIntrinsicHeight),
                     10.f, paint);
         }
 
-        mChanged = false;
+        mCurrentState.mChanged = false;
+        mCurrentState.mToggledDayTime = false;
     }
 
     @Override
@@ -179,8 +219,8 @@ public class AnalogClockTimePicker extends View {
         mDate.setHours(mHour);
         mDate.setMinutes(mMinutes);
 
-        if (mFormatter == null)
-            mFormatter = new SimpleDateFormat("hh:mm");
-        return mFormatter.format(mDate);
+        if (mTimeFormatter == null)
+            mTimeFormatter = new SimpleDateFormat("hh:mm");
+        return mTimeFormatter.format(mDate);
     }
 }
