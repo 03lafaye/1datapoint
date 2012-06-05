@@ -40,6 +40,14 @@ public class AnalogClockTimePicker extends View {
     private final static int mTimeTextDelta = 10;
     private float mTimeTextSize = 20;
 
+    public AnalogClockTimePicker(Context context) {
+        this(context, null);
+    }
+
+    public AnalogClockTimePicker(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
     public AnalogClockTimePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         Resources resources = context.getResources();
@@ -119,7 +127,7 @@ public class AnalogClockTimePicker extends View {
             canvas.save();
             canvas.rotate(mHour / 12.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
             canvas.translate((viewWidth / 2) - mHourHand.getIntrinsicWidth() / 2,
-                    (viewHeight / 2) - mHourHand.getIntrinsicHeight());
+                    (viewHeight / 2) - mHourHand.getIntrinsicHeight() + (mClockHinge.getIntrinsicWidth() / 3));
 
             mHourHand.setBounds(0, 0,
                     mHourHand.getIntrinsicWidth(), mHourHand.getIntrinsicHeight());
@@ -130,7 +138,7 @@ public class AnalogClockTimePicker extends View {
                 canvas.save();
                 canvas.rotate(mMinutes / 60.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
                 canvas.translate((viewWidth / 2) - mMinuteHand.getIntrinsicWidth() / 2,
-                        (viewHeight / 2) - mMinuteHand.getIntrinsicHeight());
+                        (viewHeight / 2) - mMinuteHand.getIntrinsicHeight() + (mClockHinge.getIntrinsicWidth() / 3));
 
                 mMinuteHand.setBounds(0, 0,
                         mMinuteHand.getIntrinsicWidth(), mMinuteHand.getIntrinsicHeight());
