@@ -13,13 +13,13 @@ import android.view.View;
 import com.onedatapoint.R;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 public class AnalogClockTimePicker extends View {
     private final static String LOGTAG = "AnalogClockTimePicker";
     private final static boolean mDebug = false;
 
-    private Date mDate;
+    private Calendar mCalendar;
 
     private Drawable mHourHand;
     private Drawable mMinuteHand;
@@ -73,14 +73,24 @@ public class AnalogClockTimePicker extends View {
         mMinuteHand = resources.getDrawable(R.drawable.clock_long_hand);
         mClockHinge = resources.getDrawable(R.drawable.clock_hinge);
         mDial = resources.getDrawable(R.drawable.clockface);
-        mCurrentState = new ClockState();
-        mCurrentState.mFirstTouch = true;
         mHour = -1;
         mMinutes = -1;
 
         mToggleDayTimeState = new ClockState();
         mToggleDayTimeState.mChanged = true;
         mToggleDayTimeState.mToggledDayTime = true;
+
+        mCurrentState = new ClockState();
+        mCurrentState.mChanged = true;
+
+        setTime(Calendar.getInstance());
+    }
+
+    public void setTime(Calendar now) {
+        mCalendar = now;
+        mHour = now.get(Calendar.HOUR);
+        mMinutes = now.get(Calendar.MINUTE);
+        mCurrentState.mIsDayTime = now.get(Calendar.AM_PM) == Calendar.AM;
     }
 
     @Override
@@ -93,6 +103,7 @@ public class AnalogClockTimePicker extends View {
                 && (y - mDayTimeTextDelta) <= 40) {
 
             boolean isDayTime = !mCurrentState.mIsDayTime;
+            mCalendar.set(Calendar.AM_PM, isDayTime ? Calendar.AM : Calendar.PM);
             mCurrentState = new ClockState(mToggleDayTimeState);
             mCurrentState.mIsDayTime = isDayTime;
 
@@ -134,6 +145,10 @@ public class AnalogClockTimePicker extends View {
                 mHour = (int) (12 * angle) / 360;
             else
                 mMinutes = (int) (60 * angle) / 360;
+
+
+            mCalendar.set(Calendar.HOUR, mHour);
+            mCalendar.set(Calendar.MINUTE, mMinutes);
 
             invalidate();
         }
@@ -213,13 +228,8 @@ public class AnalogClockTimePicker extends View {
 
     @Override
     public String toString() {
-        if (mDate == null)
-            mDate = new Date();
-        mDate.setHours(mHour);
-        mDate.setMinutes(mMinutes);
-
         if (mTimeFormatter == null)
             mTimeFormatter = new SimpleDateFormat("hh:mm");
-        return mTimeFormatter.format(mDate);
+        return mTimeFormatter.format(mCalendar.getTime());
     }
 }
