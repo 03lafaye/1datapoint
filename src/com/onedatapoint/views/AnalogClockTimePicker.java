@@ -37,6 +37,7 @@ public class AnalogClockTimePicker extends View {
     private final static int mTimeTextDelta = 10;
     private float mTimeTextSize = 20;
     private int mDayTimeTextDelta = 25;
+    private double mHourAngle;
 
     private class ClockState {
         public ClockState() {}
@@ -134,18 +135,18 @@ public class AnalogClockTimePicker extends View {
             double bY = cY - R;
 
             double angle = 2 * Math.toDegrees(Math.atan2(aY - bY, aX - bX));
-
             if (mDebug)
-                Log.v(LOGTAG, "a: " + aX + "," + aY + "; b: " + bX + "," + bY + " angle: " + angle);
+                Log.v(LOGTAG, "a: " + aX + "," + aY + "; b: " + bX + "," + bY + " angle: " + mHourAngle);
 
             mCurrentState.mChanged = true;
 
             // First touch is to set the hour hand
-            if (mCurrentState.mFirstTouch)
-                mHour = (int) (12 * angle) / 360;
-            else
-                mMinutes = (int) (60 * angle) / 360;
-
+            if (mCurrentState.mFirstTouch) {
+                mHourAngle = angle;
+                mHour = (int)Math.floor((12 * angle) / 360);
+            } else {
+                mMinutes = (int)Math.floor((60 * angle) / 360);
+            }
 
             mCalendar.set(Calendar.HOUR, mHour);
             mCalendar.set(Calendar.MINUTE, mMinutes);
@@ -177,6 +178,8 @@ public class AnalogClockTimePicker extends View {
 
         if (mCurrentState.mChanged) {
             canvas.save();
+            // We could use mHourAngle here but when the minute hand is at 12 we want the hour hand to be pointing
+            // to that hour hour exactly.
             canvas.rotate(mHour / 12.0f * 360.0f, (viewWidth / 2), (viewHeight / 2));
             canvas.translate((viewWidth / 2) - mHourHand.getIntrinsicWidth() / 2,
                     (viewHeight / 2) - mHourHand.getIntrinsicHeight() + (mClockHinge.getIntrinsicWidth() / 3));
