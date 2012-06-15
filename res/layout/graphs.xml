@@ -8,17 +8,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
+              android:layout_marginTop="30dp"
               android:layout_gravity="center"
               android:orientation="vertical">
 
     <TextView
-            android:id="@+id/level"
+            android:id="@+id/graphDescription"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="#FFFFFFFF"
             android:layout_gravity="center_horizontal"
             android:textSize="30dp"
-            android:text="Rate your levels of: "></TextView>
+            android:text=""></TextView>
 
     <com.onedatapoint.views.GraphView
         android:id="@+id/graphView"
@@ -28,15 +29,37 @@
         android:paddingBottom="10dp"
         android:src="@drawable/datapoint_graph_interface" />
 
-      <TextView
-            android:id="@+id/axis"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textColor="#FFFFFFFF"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="50dp"
-            android:textSize="24dp"
-            android:text="X: Anxiety         Y: Irritability"></TextView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="-150dp"
+        >
+        <com.onedatapoint.views.VerticalTextView
+                android:id="@+id/graphXLabel"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#FFFFFFFF"
+                android:gravity="bottom"
+                android:textSize="19dp"
+                android:text=""></com.onedatapoint.views.VerticalTextView>
+    </RelativeLayout>
+     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        >
+        <TextView
+                android:id="@+id/graphYLabel"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#FFFFFFFF"
+                android:layout_gravity="center_horizontal"
+                android:textSize="19dp"
+                android:text=""></TextView>
+     </RelativeLayout>
 
     <Button
         android:layout_gravity="center"

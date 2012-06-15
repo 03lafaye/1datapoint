@@ -14,6 +14,8 @@ import android.view.Window;
 import android.widget.TextView;
 import com.onedatapoint.config.Config;
 import com.onedatapoint.model.Question;
+import com.onedatapoint.model.XYQuestion;
+import com.onedatapoint.views.GraphView;
 
 public class CuringDepressionActivity extends Activity {
     private final static String LOGTAG = "onedatapoint";
@@ -72,6 +74,9 @@ public class CuringDepressionActivity extends Activity {
     public void openGraphs(View v) {
         canExit = false;
         setContentView(R.layout.graphs);
+        GraphView graphView = (GraphView) findViewById(R.id.graphView);
+        XYQuestion question = new XYQuestion("#FAF", "Rate your levels of:", "Anxiety", "Irritability");
+        graphView.setQuestion(question);
     }
 
     public void saveAndGoHome(View v) {

@@ -19,7 +19,7 @@ public class Config {
 		medicationRepository = new MedicationRepositoryImpl();
 	} 
 	
-	public static synchronized Config getInstance() {
+	public static Config getInstance() {
 		if (Config.instance == null) {
 			Config.instance = new Config();
 		}

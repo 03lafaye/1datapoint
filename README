@@ -1,4 +1,4 @@
-1datapoint Android Application 
+1datapoint Android Application
 
 Summary
 -------
@@ -28,9 +28,9 @@ Settings Screen
 We decided that there should be a setup screen where the user can select which
 of the data points are relevant for them; this will determine which ones
 they'll see in the future. The user should also be able to input if they are
-taking medications. 
+taking medications.
 
-This page was not developed during the RHoK weekend. 
+This page was not developed during the RHoK weekend.
 
 Notifications
 -------------
@@ -39,7 +39,7 @@ The idea is that the application will put out a regular daily status bar
 notification that prompt the user to input data. The user will click on the
 item in the notification drop down menu and will be brought into a data
 collection screen (e.g. the graph input view) where they can quickly input some
-data. 
+data.
 
 There should also be a notification that will ask the user when they took their
 medication (if applicable).
@@ -64,7 +64,7 @@ Journal
 A place where the user can jot down their "hot thought" about how they are
 feeling. It should also have a place to review previous logs.
 
-The Journal review page was not developed during the RHoK weekend. 
+The Journal review page was not developed during the RHoK weekend.
 
 Review
 ------
@@ -73,7 +73,7 @@ Where we'll show a time based graph of the data points we've collected from the
 user. Design of this page is TBD. This is where the user can see the variance
 in their mental health over time and reflect on the causes.
 
-This page was not developed during the RHoK weekend. 
+This page was not developed during the RHoK weekend.
 
 Medication
 ----------
@@ -99,7 +99,7 @@ TODO
 - Create Journal review page (within Journal section)
 - Create Review page (linked from Home)
 - Store medication time data point
-- Store Graph data points 
+- Store Graph data points
 - Persist all data points to a DB (SQLite, etc)
 - Create settings screen for user (needs wrench icon in bottom right of Home
   page)
