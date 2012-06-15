@@ -36,7 +36,7 @@
         android:layout_marginTop="-150dp"
         >
         <com.onedatapoint.views.VerticalTextView
-                android:id="@+id/graphXLabel"
+                android:id="@+id/graphYLabel"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#FFFFFFFF"
@@ -52,7 +52,7 @@
         android:layout_marginBottom="50dp"
         >
         <TextView
-                android:id="@+id/graphYLabel"
+                android:id="@+id/graphXLabel"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:textColor="#FFFFFFFF"

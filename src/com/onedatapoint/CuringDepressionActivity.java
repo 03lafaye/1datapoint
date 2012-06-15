@@ -75,7 +75,7 @@ public class CuringDepressionActivity extends Activity {
         canExit = false;
         setContentView(R.layout.graphs);
         GraphView graphView = (GraphView) findViewById(R.id.graphView);
-        XYQuestion question = new XYQuestion("#FAF", "Rate your levels of:", "Anxiety", "Irritability");
+        XYQuestion question = new XYQuestion("#FAF", "Rate your levels of:", "Irritability", "Anxiety");
         graphView.setQuestion(question);
     }
 
