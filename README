@@ -1,1 +1,108 @@
 1datapoint Android Application 
+
+Summary
+-------
+
+The 1datapoint Android application was created during the Random Hacks of
+Kindness (RHoK) 2012 weekend in Toronto. It was created with the idea that one
+datapoint is not enough to properly diagnose mental health despite it being
+exactly what doctors have been working with when a patient comes to them for a
+diagnosis. We built an application that will collect high frequency data over
+time that the user review and/or present to a doctor.
+
+Design
+------
+
+We've adopted the "Get in, get out" philosophy for our application. If we want
+the user to keep using the application, it has to be fast, simple, and pleasant
+to use. We wish to minimize the number of clicks for any task. We want the user
+interface to be clean and beautiful --unlike the majority of other mental
+wellness applications on the Android Play Store. We want to continue with the
+same colour scheme and icon style as from the RHoK weekend. A graphics designer
+will be required.
+
+
+Settings Screen
+---------------
+
+We decided that there should be a setup screen where the user can select which
+of the data points are relevant for them; this will determine which ones
+they'll see in the future. The user should also be able to input if they are
+taking medications. 
+
+This page was not developed during the RHoK weekend. 
+
+Notifications
+-------------
+
+The idea is that the application will put out a regular daily status bar
+notification that prompt the user to input data. The user will click on the
+item in the notification drop down menu and will be brought into a data
+collection screen (e.g. the graph input view) where they can quickly input some
+data. 
+
+There should also be a notification that will ask the user when they took their
+medication (if applicable).
+
+
+Home Screen
+-----------
+
+Journal         Review
+
+
+
+Medication      Graph
+
+
+The home screen consists of 4 button icons as shown above. All pages should have a "Save and Home" as well as a "Save and Quit" button to make the outcome obvious to the potentially anxious user.
+
+
+Journal
+-------
+
+A place where the user can jot down their "hot thought" about how they are
+feeling. It should also have a place to review previous logs.
+
+The Journal review page was not developed during the RHoK weekend. 
+
+Review
+------
+
+Where we'll show a time based graph of the data points we've collected from the
+user. Design of this page is TBD. This is where the user can see the variance
+in their mental health over time and reflect on the causes.
+
+This page was not developed during the RHoK weekend. 
+
+Medication
+----------
+
+Will show a time picker for when meds were took.
+
+
+Graph
+-----
+
+Shows a graph where two input variables can be taken in with a single quick
+touch.
+
+
+TODO
+----
+- Hook up questions XML data structure to the Graph views (currently X:anxiety
+  Y:irritability is hard coded)
+- Set notification schedule (daily + random)
+- Make it so clicking on notification goes right into a graph view instead of
+  going to home page
+- Store Journal entries
+- Create Journal review page (within Journal section)
+- Create Review page (linked from Home)
+- Store medication time data point
+- Store Graph data points 
+- Persist all data points to a DB (SQLite, etc)
+- Create settings screen for user (needs wrench icon in bottom right of Home
+  page)
+    - Should have medication details section
+    - Should be able to choose which of the app provided data points (e.g.
+    anxiety, irritability, etc) should not be tracked.
